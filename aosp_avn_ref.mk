@@ -15,7 +15,9 @@
 #
 
 # Inherit the full_base and device configurations
+ifeq ($(TARGET_SOC),s5p6818)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+endif
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
 # Set custom settings
