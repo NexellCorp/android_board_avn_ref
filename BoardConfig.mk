@@ -14,6 +14,11 @@
 # limitations under the License.
 #
 
+ifeq ($(TARGET_SOC),)
+$(warning *** TARGET_SOC is not defined, default set to s5p6818)
+TARGET_SOC := s5p6818
+endif
+
 ifeq ($(TARGET_SOC),s5p6818)
 -include device/nexell/avn_ref/TargetArm64Config.mk
 endif
