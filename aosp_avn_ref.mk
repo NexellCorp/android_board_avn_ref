@@ -51,6 +51,13 @@ PRODUCT_PACKAGES += \
 	audio.r_submix.default \
 	tinyplay
 
+# libion needed by gralloc, ogl
+PRODUCT_PACKAGES += libion iontest
+
+# HAL
+PRODUCT_PACKAGES += \
+	gralloc.s5pxx18
+
 # TODO
 # kernel
 
