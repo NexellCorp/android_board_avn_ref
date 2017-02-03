@@ -56,7 +56,8 @@ PRODUCT_PACKAGES += libion iontest
 
 # HAL
 PRODUCT_PACKAGES += \
-	gralloc.s5pxx18
+	gralloc.s5pxx18 \
+	libGLES_mali
 
 # TODO
 # kernel
