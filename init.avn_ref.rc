@@ -21,7 +21,7 @@ on early-init
 
 on fs
     mount_all ./fstab.avn_ref
-    swapon_all ./fstabs.avn_ref
+    swapon_all ./fstab.avn_ref
 
     restorecon_recursive /persist
 
