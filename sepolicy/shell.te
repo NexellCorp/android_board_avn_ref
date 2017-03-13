@@ -1,0 +1,1 @@
+allow shell device:dir { open read };
