@@ -14,4 +14,5 @@
 # limitations under the License.
 #
 
-# TODO
+/dev/mali	0666	system	system
+/dev/ion	0666	system	system
