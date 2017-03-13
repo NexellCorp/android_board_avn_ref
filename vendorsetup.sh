@@ -15,4 +15,3 @@
 #
 
 add_lunch_combo aosp_avn_ref-userdebug
-add_lunch_combo aosp_avn_ref-user
