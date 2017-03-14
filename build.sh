@@ -14,6 +14,7 @@ parse_args -b ${BOARD} $@
 print_args
 setup_toolchain
 export_work_dir
+patches
 
 CROSS_COMPILE=
 if [ "${TARGET_SOC}" == "s5p6818" ]; then
