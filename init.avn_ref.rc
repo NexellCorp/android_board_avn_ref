@@ -19,6 +19,10 @@ import init.avn_ref.usb.rc
 on early-init
     mount debugfs debugfs /sys/kernel/debug
 
+on init
+    export TSLIB_PLUGINDIR /system/lib64/
+    export TSLIB_CALIBFILE /system/etc/pointercal
+
 on fs
     mount_all ./fstab.avn_ref
     swapon_all ./fstab.avn_ref
