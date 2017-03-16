@@ -33,9 +33,9 @@ PRODUCT_COPY_FILES += \
 
 # input
 PRODUCT_COPY_FILES += \
-	device/nexell/avn_ref/tsc2007.idc:system/usr/idc/tsc2007.idc \
-	device/nexell/avn_ref/keypad_avn_ref.kl:system/usr/keylayout/keypad_avn_ref.kl \
-	device/nexell/avn_ref/keypad_avn_ref.kcm:system/usr/keychars/keypad_avn_ref.kcm
+	device/nexell/avn_ref/TSC2007_Touchscreen.idc:system/usr/idc/TSC2007_Touchscreen.idc \
+	device/nexell/avn_ref/gpio_keys.kl:system/usr/keylayout/gpio_keys.kl \
+	device/nexell/avn_ref/gpio_keys.kcm:system/usr/keychars/gpio_keys.kcm
 
 # hardware features
 PRODUCT_COPY_FILES += \
