@@ -81,17 +81,17 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += fs_config_files
 
-# PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
 	libtslib \
 	inputraw \
 	pthres \
 	dejitter \
 	linear \
-	tscalib \
-	TSCalibration
+	tscalib
 
-# PRODUCT_COPY_FILES += \
-	external/tslib/ts.conf:system/etc/ts.conf
+PRODUCT_COPY_FILES += \
+	external/tslib/ts.conf:system/etc/ts.conf \
+	device/nexell/avn_ref/pointercal:system/etc/pointercal
 
 DEVICE_PACKAGE_OVERLAYS := device/nexell/avn_ref/overlay
 
