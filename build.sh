@@ -30,14 +30,7 @@ OPTEE_BUILD_OPT+=" CROSS_COMPILE=${CROSS_COMPILE} CROSS_COMPILE32=${CROSS_COMPIL
 OPTEE_BUILD_OPT+=" UBOOT_DIR=${UBOOT_DIR}"
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_BL1}" == "true" ]; then
-	# TODO: after bl1 revision, apply real boardname to second arg
-	build_bl1 ${BL1_DIR}/bl1-${TARGET_SOC} AVN
-	gen_bl1 ${TARGET_SOC} ${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-avn.bin \
-		device/nexell/avn_ref/nsih_avn_ref_usb.txt \
-		${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-usbboot.img
-	gen_bl1 ${TARGET_SOC} ${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-avn.bin \
-		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
-		${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-emmcboot.img
+	build_bl1 ${BL1_DIR}/bl1-${TARGET_SOC} avn 2
 fi
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_UBOOT}" == "true" ]; then
