@@ -47,11 +47,18 @@ fi
 
 if [ "${TARGET_SOC}" == "s5p6818" ] && [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_SECURE}" == "true" ]; then
 	build_optee ${OPTEE_DIR} "${OPTEE_BUILD_OPT}" all
-	# generate fip-loader.img
-	gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-loader.bin \
+	# generate fip-loader-emmc.img
+	gen_third ${TARGET_SOC} \
+		${OPTEE_DIR}/arm-trusted-firmware/build/s5p6818/release/fip-loader.bin \
 		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
-		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader.img \
+		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-emmc.img \
 		"-k 3 -m 0x60200 -b 3 -p 2 -m 0x1E0200 -b 3 -p 2"
+	# generate fip-loader-sd.img
+	gen_third ${TARGET_SOC} \
+		${OPTEE_DIR}/arm-trusted-firmware/build/s5p6818/release/fip-loader.bin \
+		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
+		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-sd.img \
+		"-k 3 -m 0x60200 -b 3 -p 0 -m 0x1E0200 -b 3 -p 0"
 	# generate fip-secure.img
 	gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-secure.bin \
 		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
@@ -60,6 +67,17 @@ if [ "${TARGET_SOC}" == "s5p6818" ] && [ "${BUILD_ALL}" == "true" ] || [ "${BUIL
 	gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-nonsecure.bin \
 		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7df00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
+	# generate fip-loader-usb.img
+	# first -z size : size of fip-secure.img
+	# second -z size : size of fip-nonsecure.img
+	# TODO: get size by runtime
+	gen_third ${TARGET_SOC} \
+		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
+		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
+		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img \
+		"-k 0 -u -m 0x7fb00000 -z 266580 -m 0x7df00000 -z 443000"
+	cat ${OPTEE_DIR}/optee_build/result/fip-secure.img >> ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img
+	cat ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img >> ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img
 fi
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_KERNEL}" == "true" ]; then
@@ -79,4 +97,5 @@ post_process ${TARGET_SOC} \
 	${KERNEL_DIR}/arch/arm64/boot \
 	${KERNEL_DIR}/arch/arm64/boot/dts/nexell \
 	33554432 \
-	${TOP}/out/target/product/${BOARD}
+	${TOP}/out/target/product/${BOARD} \
+	avn
