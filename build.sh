@@ -26,7 +26,7 @@ else
 fi
 
 OPTEE_BUILD_OPT="PLAT_DRAM_SIZE=1024 PLAT_UART_BASE=0xc00a3000 SECURE_ON=0"
-OPTEE_BUILD_OPT+=" CROSS_COMPILE=${CROSS_COMPILE} CROSS_COMPILE32=${CROSS_COMPILE32}"
+OPTEE_BUILD_OPT+=" CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE32=${CROSS_COMPILE32}"
 OPTEE_BUILD_OPT+=" UBOOT_DIR=${UBOOT_DIR}"
 
 UBOOT_BOOTCMD="ext4load mmc 0:1 0x40008000 Image; ext4load mmc 0:1 0x48000000 ramdisk.img; ext4load mmc 0:1 0x49000000 s5p6818-avn-ref-rev01.dtb; booti 0x40008000 0x48000000 0x49000000"
@@ -42,6 +42,7 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_UBOOT}" == "true" ]; then
 	cd ${UBOOT_DIR}
 	build_uboot_env_param ${CROSS_COMPILE} "${UBOOT_BOOTCMD}" "${UBOOT_BOOTARGS}"
 	popd
+
 	if [ "${BUILD_UBOOT}" == "true" ]; then
 		build_optee ${OPTEE_DIR} "${OPTEE_BUILD_OPT}" build-fip-nonsecure
 		build_optee ${OPTEE_DIR} "${OPTEE_BUILD_OPT}" build-singleimage
@@ -55,14 +56,17 @@ fi
 if [ "${TARGET_SOC}" == "s5p6818" ] && [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_SECURE}" == "true" ]; then
 	build_optee ${OPTEE_DIR} "${OPTEE_BUILD_OPT}" all
 	# generate fip-loader-emmc.img
+	# -m argument decided by partmap.txt
+	#    first: fip-secure.img offset
+	#    second: fip-nonsecure.img offset
 	gen_third ${TARGET_SOC} \
-		${OPTEE_DIR}/arm-trusted-firmware/build/s5p6818/release/fip-loader.bin \
+		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
 		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-emmc.img \
 		"-k 3 -m 0x60200 -b 3 -p 2 -m 0x1E0200 -b 3 -p 2"
 	# generate fip-loader-sd.img
 	gen_third ${TARGET_SOC} \
-		${OPTEE_DIR}/arm-trusted-firmware/build/s5p6818/release/fip-loader.bin \
+		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
 		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-sd.img \
 		"-k 3 -m 0x60200 -b 3 -p 0 -m 0x1E0200 -b 3 -p 0"
@@ -77,12 +81,13 @@ if [ "${TARGET_SOC}" == "s5p6818" ] && [ "${BUILD_ALL}" == "true" ] || [ "${BUIL
 	# generate fip-loader-usb.img
 	# first -z size : size of fip-secure.img
 	# second -z size : size of fip-nonsecure.img
-	# TODO: get size by runtime
+	fip_sec_size=$(stat --printf="%s" ${OPTEE_DIR}/optee_build/result/fip-secure.img)
+	fip_nonsec_size=$(stat --printf="%s" ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img)
 	gen_third ${TARGET_SOC} \
 		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
 		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img \
-		"-k 0 -u -m 0x7fb00000 -z 266580 -m 0x7df00000 -z 443000"
+		"-k 0 -u -m 0x7fb00000 -z ${fip_sec_size} -m 0x7df00000 -z ${fip_nonsec_size}"
 	cat ${OPTEE_DIR}/optee_build/result/fip-secure.img >> ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img
 	cat ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img >> ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img
 fi
