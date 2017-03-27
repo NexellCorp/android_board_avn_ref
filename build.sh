@@ -7,6 +7,7 @@ export TOP
 
 source ${TOP}/device/nexell/tools/common.sh
 source ${TOP}/device/nexell/tools/dir.sh
+source ${TOP}/device/nexell/tools/make_build_info.sh
 
 BOARD=$(get_board_name $0)
 
@@ -111,3 +112,5 @@ post_process ${TARGET_SOC} \
 	33554432 \
 	${TOP}/out/target/product/${BOARD} \
 	avn
+
+make_build_info ${RESULT_DIR}
