@@ -31,6 +31,14 @@ PRODUCT_COPY_FILES += \
 	frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml
 
+PRODUCT_COPY_FILES += \
+	device/nexell/avn_ref/audio/tiny_hw.avn_ref.xml:system/etc/tiny_hw.avn_ref.xml \
+	device/nexell/avn_ref/audio/audio_policy.conf:system/etc/audio_policy.conf
+
+PRODUCT_COPY_FILES += \
+	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+	device/nexell/avn_ref/media_codecs.xml:system/etc/media_codecs.xml
+
 # input
 PRODUCT_COPY_FILES += \
 	device/nexell/avn_ref/TSC2007_Touchscreen.idc:system/usr/idc/TSC2007_Touchscreen.idc \
@@ -77,7 +85,16 @@ PRODUCT_PACKAGES += libdrm
 PRODUCT_PACKAGES += \
 	gralloc.avn_ref \
 	libGLES_mali \
-	hwcomposer.avn_ref
+	hwcomposer.avn_ref \
+	audio.primary.avn_ref
+
+# tinyalsa
+PRODUCT_PACKAGES += \
+	libtinyalsa \
+	tinyplay \
+	tinycap \
+	tinymix \
+	tinypcminfo
 
 PRODUCT_PACKAGES += fs_config_files
 
