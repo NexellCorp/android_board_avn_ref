@@ -49,7 +49,6 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_UBOOT}" == "true" ]; then
 		build_optee ${OPTEE_DIR} "${OPTEE_BUILD_OPT}" build-singleimage
 		# generate fip-nonsecure.img
 		gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-nonsecure.bin \
-			device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 			0x7df00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
 	fi
 fi
@@ -62,22 +61,18 @@ if [ "${TARGET_SOC}" == "s5p6818" ] && [ "${BUILD_ALL}" == "true" ] || [ "${BUIL
 	#    second: fip-nonsecure.img offset
 	gen_third ${TARGET_SOC} \
 		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
-		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-emmc.img \
 		"-k 3 -m 0x60200 -b 3 -p 2 -m 0x1E0200 -b 3 -p 2"
 	# generate fip-loader-sd.img
 	gen_third ${TARGET_SOC} \
 		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
-		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-sd.img \
 		"-k 3 -m 0x60200 -b 3 -p 0 -m 0x1E0200 -b 3 -p 0"
 	# generate fip-secure.img
 	gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-secure.bin \
-		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7fb00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-secure.img
 	# generate fip-nonsecure.img
 	gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-nonsecure.bin \
-		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7df00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
 	# generate fip-loader-usb.img
 	# first -z size : size of fip-secure.img
@@ -86,7 +81,6 @@ if [ "${TARGET_SOC}" == "s5p6818" ] && [ "${BUILD_ALL}" == "true" ] || [ "${BUIL
 	fip_nonsec_size=$(stat --printf="%s" ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img)
 	gen_third ${TARGET_SOC} \
 		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
-		device/nexell/avn_ref/nsih_avn_ref_emmc.txt \
 		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img \
 		"-k 0 -u -m 0x7fb00000 -z ${fip_sec_size} -m 0x7df00000 -z ${fip_nonsec_size}"
 	cat ${OPTEE_DIR}/optee_build/result/fip-secure.img >> ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img
