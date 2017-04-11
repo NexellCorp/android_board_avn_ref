@@ -26,7 +26,7 @@ else
 	CROSS_COMPILE="arm-eabi-"
 fi
 
-OPTEE_BUILD_OPT="PLAT_DRAM_SIZE=1024 PLAT_UART_BASE=0xc00a3000 SECURE_ON=0"
+OPTEE_BUILD_OPT="PLAT_DRAM_SIZE=2048 PLAT_UART_BASE=0xc00a3000 SECURE_ON=0"
 OPTEE_BUILD_OPT+=" CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE32=${CROSS_COMPILE32}"
 OPTEE_BUILD_OPT+=" UBOOT_DIR=${UBOOT_DIR}"
 
@@ -49,7 +49,7 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_UBOOT}" == "true" ]; then
 		build_optee ${OPTEE_DIR} "${OPTEE_BUILD_OPT}" build-singleimage
 		# generate fip-nonsecure.img
 		gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-nonsecure.bin \
-			0x7df00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
+			0xbdf00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
 	fi
 fi
 
@@ -61,19 +61,19 @@ if [ "${TARGET_SOC}" == "s5p6818" ] && [ "${BUILD_ALL}" == "true" ] || [ "${BUIL
 	#    second: fip-nonsecure.img offset
 	gen_third ${TARGET_SOC} \
 		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
-		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-emmc.img \
+		0xbfcc0000 0xbfd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-emmc.img \
 		"-k 3 -m 0x60200 -b 3 -p 2 -m 0x1E0200 -b 3 -p 2"
 	# generate fip-loader-sd.img
 	gen_third ${TARGET_SOC} \
 		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
-		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-sd.img \
+		0xbfcc0000 0xbfd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-sd.img \
 		"-k 3 -m 0x60200 -b 3 -p 0 -m 0x1E0200 -b 3 -p 0"
 	# generate fip-secure.img
 	gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-secure.bin \
-		0x7fb00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-secure.img
+		0xbfb00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-secure.img
 	# generate fip-nonsecure.img
 	gen_third ${TARGET_SOC} ${OPTEE_DIR}/optee_build/result/fip-nonsecure.bin \
-		0x7df00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
+		0xbdf00000 0x00000000 ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
 	# generate fip-loader-usb.img
 	# first -z size : size of fip-secure.img
 	# second -z size : size of fip-nonsecure.img
@@ -81,8 +81,8 @@ if [ "${TARGET_SOC}" == "s5p6818" ] && [ "${BUILD_ALL}" == "true" ] || [ "${BUIL
 	fip_nonsec_size=$(stat --printf="%s" ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img)
 	gen_third ${TARGET_SOC} \
 		${OPTEE_DIR}/optee_build/result/fip-loader.bin \
-		0x7fcc0000 0x7fd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img \
-		"-k 0 -u -m 0x7fb00000 -z ${fip_sec_size} -m 0x7df00000 -z ${fip_nonsec_size}"
+		0xbfcc0000 0xbfd00800 ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img \
+		"-k 0 -u -m 0xbfb00000 -z ${fip_sec_size} -m 0xbdf00000 -z ${fip_nonsec_size}"
 	cat ${OPTEE_DIR}/optee_build/result/fip-secure.img >> ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img
 	cat ${OPTEE_DIR}/optee_build/result/fip-nonsecure.img >> ${OPTEE_DIR}/optee_build/result/fip-loader-usb.img
 fi
