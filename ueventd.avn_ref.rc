@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
-/dev/mali	0666	system	system
-/dev/ion	0666	system	system
+/dev/mali		0666	system	system
+/dev/sw_sync	0666	system	system
+/dev/ion		0666	system	system
 /dev/ttySAC*	0666	system	system
