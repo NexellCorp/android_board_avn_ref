@@ -110,6 +110,24 @@ PRODUCT_COPY_FILES += \
 	external/tslib/ts.conf:system/etc/ts.conf \
 	device/nexell/avn_ref/pointercal:system/etc/pointercal
 
+# wifi
+PRODUCT_PACKAGES += \
+    libwpa_client \
+    hostapd \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
+PRODUCT_PACKAGES += \
+	rtw_fwloader
+
+PRODUCT_COPY_FILES += \
+	hardware/realtek/wlan/driver/rtl8188eus/wlan.ko:system/vendor/realtek/wlan.ko
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	wifi.interface=wlan0
+
+$(call inherit-product-if-exists, hardware/realtek/wlan/config/p2p_supplicant.mk)
+
 DEVICE_PACKAGE_OVERLAYS := device/nexell/avn_ref/overlay
 
 # limit dex2oat threads to improve thermals
