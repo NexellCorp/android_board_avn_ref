@@ -1,0 +1,1 @@
+type rtw_fwloader_service,	service_manager_type;
