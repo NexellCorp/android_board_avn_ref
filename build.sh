@@ -91,6 +91,10 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_KERNEL}" == "true" ]; then
 	build_kernel ${KERNEL_DIR} ${TARGET_SOC} ${BOARD} s5p6818_avn_ref_nougat_defconfig ${CROSS_COMPILE}
 fi
 
+if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_MODULE}" == "true" ]; then
+	build_module ${KERNEL_DIR} ${TARGET_SOC} ${CROSS_COMPILE}
+fi
+
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
 	build_android ${TARGET_SOC} ${BOARD} userdebug
 fi
