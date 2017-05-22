@@ -26,6 +26,9 @@ PRODUCT_MANUFACTURER := NEXELL
 
 PRODUCT_COPY_FILES += device/nexell/avn_ref/fstab.avn_ref:root/fstab.avn_ref
 
+# Disable bluetooth because avn_ref does not use bluetooth source
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
+
 $(call inherit-product, device/nexell/avn_ref/device.mk)
 
 PRODUCT_PACKAGES += \
