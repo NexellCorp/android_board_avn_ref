@@ -19,3 +19,4 @@
 /dev/ion		0666	system	system
 /dev/ttySAC*	0666	system	system
 /dev/video6	0666	system	system
+/dev/ttyAMA*	0666	system	system

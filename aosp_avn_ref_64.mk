@@ -24,7 +24,9 @@ PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on avn_ref
 PRODUCT_MANUFACTURER := NEXELL
 
-PRODUCT_COPY_FILES += device/nexell/avn_ref/fstab.avn_ref:root/fstab.avn_ref
+PRODUCT_COPY_FILES += \
+		device/nexell/avn_ref/fstab.avn_ref:root/fstab.avn_ref \
+		device/nexell/avn_ref/init.avn_ref_64.rc:root/init.avn_ref.rc
 
 # Disable bluetooth because avn_ref does not use bluetooth source
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
