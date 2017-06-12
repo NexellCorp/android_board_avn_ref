@@ -32,7 +32,7 @@ OPTEE_BUILD_OPT+=" CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE32=${CROSS_COMP
 OPTEE_BUILD_OPT+=" UBOOT_DIR=${UBOOT_DIR}"
 
 UBOOT_BOOTCMD="ext4load mmc 0:1 0x40080000 Image; ext4load mmc 0:1 0x48000000 ramdisk.img; ext4load mmc 0:1 0x49000000 s5p6818-avn-ref-rev01.dtb; booti 0x40080000 0x48000000 0x49000000"
-UBOOT_BOOTARGS="console=ttySAC3,115200n8 loglevel=7 printk.time=1 androidboot.hardware=avn_ref androidboot.console=ttySAC3 androidboot.serialno=0123456789abcdef nx_drm.fb_buffers=3 nx_drm.fb_vblank"
+UBOOT_BOOTARGS="console=ttySAC3,115200n8 loglevel=7 printk.time=1 androidboot.hardware=avn_ref androidboot.console=ttySAC3 androidboot.serialno=0123456789abcdef nx_drm.fb_buffers=3 nx_drm.fb_vblank quiet"
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_BL1}" == "true" ]; then
 	build_bl1 ${BL1_DIR}/bl1-${TARGET_SOC} avn 2
