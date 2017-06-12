@@ -15,23 +15,7 @@
 #
 
 # Inherit the full_base and device configurations
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
-
-PRODUCT_NAME := aosp_avn_ref
-PRODUCT_DEVICE := avn_ref
-PRODUCT_BRAND := Android
-PRODUCT_MODEL := AOSP on avn_ref
-PRODUCT_MANUFACTURER := NEXELL
+$(call inherit-product, device/nexell/avn_ref/aosp_avn_ref_common.mk)
 
 PRODUCT_COPY_FILES += \
-		device/nexell/avn_ref/fstab.avn_ref:root/fstab.avn_ref \
 		device/nexell/avn_ref/init.avn_ref_32.rc:root/init.avn_ref.rc
-
-# Disable bluetooth because avn_ref does not use bluetooth source
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
-
-$(call inherit-product, device/nexell/avn_ref/device.mk)
-
-PRODUCT_PACKAGES += \
-	Launcher3
-
