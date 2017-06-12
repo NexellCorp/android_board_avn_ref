@@ -57,6 +57,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_CONFIG += mdpi xlarge large
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_AAPT_PREBUILT_DPI := hdpi mdpi ldpi
 PRODUCT_CHARACTERISTICS := tablet
