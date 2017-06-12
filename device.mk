@@ -14,6 +14,40 @@
 # limitations under the License.
 #
 
+PRODUCT_SHIPPING_API_LEVEL := 25
+
+PRODUCT_PACKAGES := \
+    AccountAndSyncSettings \
+    DeskClock \
+    AlarmProvider \
+    Calculator \
+    Calendar \
+    Camera \
+    CertInstaller \
+    Email \
+    Gallery2 \
+    LatinIME \
+    Provision \
+    QuickSearchBox \
+    Settings \
+    Sync \
+    SystemUI \
+    CalendarProvider \
+    SyncProvider \
+	Stk
+
+# Live Wallpapers
+PRODUCT_PACKAGES += \
+	LiveWallpapers \
+	LiveWallpapersPicker \
+	VisualizationWallpapers \
+	librs_jni
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    make_ext4fs \
+    setup_fs
+
 PRODUCT_COPY_FILES += \
 	device/nexell/avn_ref/init.avn_ref.usb.rc:root/init.avn_ref.usb.rc \
 	device/nexell/avn_ref/fstab.avn_ref:root/fstab.avn_ref \
@@ -46,13 +80,20 @@ PRODUCT_COPY_FILES += \
 
 # hardware features
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
+	device/nexell/avn_ref/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 	frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
-	frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+	frameworks/native/data/etc/android.hardware.faketouch.xml:system/etc/permissions/android.hardware.faketouch.xml
+
+# wallpaper
+# This introduces "com.android.cts.devicepolicy.MixedDeviceOwnerTest#testDisallowSetWallpaper_allowed fail" of CtsDevicePolicyManagerTestCases
+PRODUCT_COPY_FILES += \
+	device/nexell/avn_ref/wallpaper:/data/system/users/0/wallpaper \
+	device/nexell/avn_ref/wallpaper_orig:/data/system/users/0/wallpaper_orig \
+	device/nexell/avn_ref/wallpaper_info.xml:/data/system/users/0/wallpaper_info.xml
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -130,10 +171,24 @@ $(call inherit-product-if-exists, hardware/realtek/wlan/config/p2p_supplicant.mk
 
 DEVICE_PACKAGE_OVERLAYS := device/nexell/avn_ref/overlay
 
-# limit dex2oat threads to improve thermals
+# increase dex2oat threads to improve booting time
 PRODUCT_PROPERTY_OVERRIDES += \
-	dalvik.vm.boot-dex2oat-threads=4 \
-	dalvik.vm.dex2oat-threads=4 \
-	dalvik.vm.image-dex2oat-threads=4
+	dalvik.vm.boot-dex2oat-threads=8 \
+	dalvik.vm.dex2oat-threads=8 \
+	dalvik.vm.image-dex2oat-threads=8
 
-$(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
+#Enabling video for live effects
+-include frameworks/base/data/videos/VideoPackage1.mk
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapstartsize=16m \
+    dalvik.vm.heapgrowthlimit=256m \
+    dalvik.vm.heapsize=512m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=512k
+    dalvik.vm.heapmaxfree=8m
+
+#skip boot jars check
+SKIP_BOOT_JARS_CHECK := true
+
+$(call inherit-product, frameworks/base/data/fonts/fonts.mk)
