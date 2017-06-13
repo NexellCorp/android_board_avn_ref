@@ -167,7 +167,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0
 
-$(call inherit-product-if-exists, hardware/realtek/wlan/config/p2p_supplicant.mk)
+# $(call inherit-product-if-exists, hardware/realtek/wlan/config/p2p_supplicant.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/nexell/avn_ref/overlay
 
@@ -185,7 +185,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=256m \
     dalvik.vm.heapsize=512m \
     dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapminfree=512k
+    dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=8m
 
 #skip boot jars check
