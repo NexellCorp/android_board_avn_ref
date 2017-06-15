@@ -97,3 +97,6 @@ WIFI_DRIVER_FW_PATH_STA		:= "STA"
 WIFI_DRIVER_FW_PATH_AP		:= "AP"
 WIFI_DRIVER_FW_PATH_P2P		:= "P2P"
 WIFI_DRIVER_FW_PATH_PARAM	:= "/dev/null"
+
+# certificate
+PRODUCT_DEFAULT_DEV_CERTIFICATE := device/nexell/avn_ref/signing_keys/release

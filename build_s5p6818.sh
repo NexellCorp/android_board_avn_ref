@@ -34,6 +34,24 @@ OPTEE_BUILD_OPT+=" UBOOT_DIR=${UBOOT_DIR}"
 UBOOT_BOOTCMD="ext4load mmc 0:1 0x40080000 Image; ext4load mmc 0:1 0x48000000 ramdisk.img; ext4load mmc 0:1 0x49000000 s5p6818-avn-ref-rev01.dtb; booti 0x40080000 0x48000000 0x49000000"
 UBOOT_BOOTARGS="console=ttySAC3,115200n8 loglevel=7 printk.time=1 androidboot.hardware=avn_ref androidboot.console=ttySAC3 androidboot.serialno=0123456789abcdef nx_drm.fb_buffers=3 nx_drm.fb_vblank quiet"
 
+declare -a security=("testkey" "shared" "media" "release" "platform")
+
+function generate_key()
+{
+	echo "key generation for ${TARGET_SOC}_${BOARD_NAME}"
+	if ! [ -d ${TOP}/device/nexell/${BOARD_NAME}/signing_keys ];then
+		mkdir -p ${TOP}/device/nexell/${BOARD_NAME}/signing_keys
+	fi
+
+	for i in ${security[@]}
+	do
+		if [ ! -e  ${TOP}/device/nexell/${BOARD_NAME}/signing_keys/$i.pk8 ];then
+			${TOP}/device/nexell/${BOARD_NAME}/mkkey.sh $i ${BOARD_NAME}
+		fi
+	done
+	echo "End of generate_key"
+}
+
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_BL1}" == "true" ]; then
 	build_bl1 ${BL1_DIR}/bl1-${TARGET_SOC} avn 2
 fi
@@ -97,6 +115,7 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_MODULE}" == "true" ]; then
 fi
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
+	generate_key
 	build_android ${TARGET_SOC} ${BOARD} userdebug
 fi
 
