@@ -89,7 +89,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.faketouch.xml:system/etc/permissions/android.hardware.faketouch.xml
 
 # wallpaper
-# This introduces "com.android.cts.devicepolicy.MixedDeviceOwnerTest#testDisallowSetWallpaper_allowed fail" of CtsDevicePolicyManagerTestCases
 PRODUCT_COPY_FILES += \
 	device/nexell/avn_ref/wallpaper:/data/system/users/0/wallpaper \
 	device/nexell/avn_ref/wallpaper_orig:/data/system/users/0/wallpaper_orig \
@@ -127,7 +126,8 @@ PRODUCT_PACKAGES += \
 	gralloc.avn_ref \
 	libGLES_mali \
 	hwcomposer.avn_ref \
-	audio.primary.avn_ref
+	audio.primary.avn_ref \
+	memtrack.avn_ref
 
 # tinyalsa
 PRODUCT_PACKAGES += \
