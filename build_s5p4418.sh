@@ -79,7 +79,7 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_MODULE}" == "true" ]; then
 fi
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
-	build_android ${TARGET_SOC} ${BOARD} userdebug
+	build_android ${TARGET_SOC} ${BOARD} ${BUILD_TAG}
 fi
 
 post_process ${TARGET_SOC} \
