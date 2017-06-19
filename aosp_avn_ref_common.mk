@@ -32,6 +32,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Disable bluetooth because avn_ref does not use bluetooth source
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
 
+# Disable other feature no needed in avn board
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_serial=true
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_samplingprof=true
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_consumerir=true
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_rtt=true
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_vrmanager=true
+
 $(call inherit-product, device/nexell/avn_ref/device.mk)
 
 PRODUCT_PACKAGES += \
