@@ -127,7 +127,8 @@ PRODUCT_PACKAGES += \
 	libGLES_mali \
 	hwcomposer.avn_ref \
 	audio.primary.avn_ref \
-	memtrack.avn_ref
+	memtrack.avn_ref \
+	camera.avn_ref
 
 # tinyalsa
 PRODUCT_PACKAGES += \
