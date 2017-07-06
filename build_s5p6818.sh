@@ -127,7 +127,7 @@ post_process ${TARGET_SOC} \
 	${UBOOT_DIR} \
 	${KERNEL_DIR}/arch/arm64/boot \
 	${KERNEL_DIR}/arch/arm64/boot/dts/nexell \
-	33554432 \
+	67108864 \
 	${TOP}/out/target/product/${BOARD} \
 	avn
 
