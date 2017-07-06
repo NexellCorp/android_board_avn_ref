@@ -129,6 +129,7 @@ post_process ${TARGET_SOC} \
 	${KERNEL_DIR}/arch/arm64/boot/dts/nexell \
 	67108864 \
 	${TOP}/out/target/product/${BOARD} \
-	avn
+	avn \
+	${TOP}/device/nexell/avn_ref/logo.bmp
 
 make_build_info ${RESULT_DIR}
