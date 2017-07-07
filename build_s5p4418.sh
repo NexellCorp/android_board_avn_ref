@@ -90,7 +90,7 @@ post_process ${TARGET_SOC} \
 	${UBOOT_DIR} \
 	${KERNEL_DIR}/arch/arm/boot \
 	${KERNEL_DIR}/arch/arm/boot/dts \
-	33554432 \
+	67108864 \
 	${TOP}/out/target/product/${BOARD} \
 	avn
 
