@@ -92,7 +92,8 @@ post_process ${TARGET_SOC} \
 	${KERNEL_DIR}/arch/arm/boot/dts \
 	67108864 \
 	${TOP}/out/target/product/${BOARD} \
-	avn
+	avn \
+	${TOP}/device/nexell/avn_ref/logo.bmp
 
 address=0x93c00000
 if [ "${MEM}" == "2GB" ]; then
