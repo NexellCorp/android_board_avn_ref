@@ -20,3 +20,15 @@ $(call inherit-product, device/nexell/avn_ref/aosp_avn_ref_common.mk)
 
 PRODUCT_COPY_FILES += \
 		device/nexell/avn_ref/init.avn_ref_64.rc:root/init.avn_ref.rc
+
+PRODUCT_COPY_FILES += \
+		device/nexell/kernel/kernel-4.4.x/arch/arm64/boot/Image:kernel
+
+PRODUCT_COPY_FILES += \
+		device/nexell/avn_ref/bootloader:bootloader
+
+PRODUCT_COPY_FILES += \
+		device/nexell/kernel/kernel-4.4.x/arch/arm64/boot/dts/nexell/s5p6818-avn-ref-rev01.dtb:2ndbootloader
+
+PRODUCT_COPY_FILES += \
+	device/nexell/avn_ref/fstab.avn_ref:root/fstab.avn_ref
