@@ -19,3 +19,9 @@ $(call inherit-product, device/nexell/avn_ref/aosp_avn_ref_common.mk)
 
 PRODUCT_COPY_FILES += \
 		device/nexell/avn_ref/init.avn_ref_32.rc:root/init.avn_ref.rc
+
+PRODUCT_COPY_FILES += \
+		device/nexell/kernel/kernel-4.4.x/arch/arm/boot/zImage:kernel
+
+PRODUCT_COPY_FILES += \
+	device/nexell/avn_ref/fstab.avn_ref.s5p4418:root/fstab.avn_ref
