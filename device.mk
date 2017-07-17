@@ -50,7 +50,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
 	device/nexell/avn_ref/init.avn_ref.usb.rc:root/init.avn_ref.usb.rc \
-	device/nexell/avn_ref/fstab.avn_ref:root/fstab.avn_ref \
 	device/nexell/avn_ref/ueventd.avn_ref.rc:root/ueventd.avn_ref.rc
 
 PRODUCT_COPY_FILES += \
