@@ -20,4 +20,6 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a9
 
+TARGET_BOARD_PLATFORM := s5p4418
+
 include device/nexell/avn_ref/BoardConfigCommon.mk
