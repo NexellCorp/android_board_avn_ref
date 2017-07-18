@@ -37,9 +37,6 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 MAX_VIRTUAL_DISPLAY_DIMENSION := 2048
 
 # hwcomposer
-BOARD_USES_NX_SIMPLE_HWCOMPOSER := true
-# BOARD_USES_NX_DRM_HWCOMPOSER := true
-BOARD_DRM_HWCOMPOSER_BUFFER_IMPORTER := mali-gralloc
 BOARD_USES_NX_HWCOMPOSER := true
 
 # Enable dex-preoptimization to speed up first boot sequence
