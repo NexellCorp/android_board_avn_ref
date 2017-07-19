@@ -209,41 +209,34 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_UBOOT}" == "true" ]; then
 	popd
 fi
 
-if [ "${BUILD_ALL}" == "true" ] || \
-   [ "${BUILD_BL1}" == "true" ] || \
-   [ "${BUILD_UBOOT}" == "true" ] || \
-   [ "${BUILD_SECURE}" == "true" ]; then
-	# TODO: get seek offset from configuration file
-	bl1=${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-emmcboot.bin
-	fip_loader=${OPTEE_DIR}/optee_build/result/fip-loader-emmc.img
-	fip_secure=${OPTEE_DIR}/optee_build/result/fip-secure.img
-	fip_nonsecure=${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
-	uboot_param=${UBOOT_DIR}/params.bin
-	boot_logo=${TOP}/device/nexell/avn_ref/logo.bmp
-	out_file=${TOP}/device/nexell/avn_ref/bootloader
-	test -f ${out_file} && rm -f ${out_file}
-	# 0x2e4000: see below information
-	#######################################################################
-	# flash=mmc,0:bl1:2nd:0x200,0x10000:bl1-emmcboot.bin;
-	# flash=mmc,0:fip-loader:boot:0x10200,0x50000:fip-loader-emmc.img;
-	# flash=mmc,0:fip-secure:boot:0x60200,0x180000:fip-secure.img;
-	# flash=mmc,0:fip-nonsecure:boot:0x1E0200,0x100000:fip-nonsecure.img;
-	# flash=mmc,0:env:env:0x2E0200,0x4000:params.bin;
-	# flash=mmc,0:logo:boot:0x2E4200,0x200000:logo.bmp
-	#######################################################################
-	dd if=/dev/zero of=${out_file} bs=16384 count=185
-	dd if=${bl1} of=${out_file} bs=1
-	dd if=${fip_loader} of=${out_file} seek=65536 bs=1
-	dd if=${fip_secure} of=${out_file} seek=393216 bs=1
-	dd if=${fip_nonsecure} of=${out_file} seek=1966080 bs=1
-	dd if=${uboot_param} of=${out_file} seek=3014656 bs=1
-	dd if=${boot_logo} of=${out_file} seek=3031040 bs=1
-	sync
+# TODO: get seek offset from configuration file
+bl1=${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-emmcboot.bin
+fip_loader=${OPTEE_DIR}/optee_build/result/fip-loader-emmc.img
+fip_secure=${OPTEE_DIR}/optee_build/result/fip-secure.img
+fip_nonsecure=${OPTEE_DIR}/optee_build/result/fip-nonsecure.img
+uboot_param=${UBOOT_DIR}/params.bin
+boot_logo=${TOP}/device/nexell/avn_ref/logo.bmp
+out_file=${TOP}/device/nexell/avn_ref/bootloader
+test -f ${out_file} && rm -f ${out_file}
+# 0x2e4000: see below information
+#######################################################################
+# flash=mmc,0:bl1:2nd:0x200,0x10000:bl1-emmcboot.bin;
+# flash=mmc,0:fip-loader:boot:0x10200,0x50000:fip-loader-emmc.img;
+# flash=mmc,0:fip-secure:boot:0x60200,0x180000:fip-secure.img;
+# flash=mmc,0:fip-nonsecure:boot:0x1E0200,0x100000:fip-nonsecure.img;
+# flash=mmc,0:env:env:0x2E0200,0x4000:params.bin;
+# flash=mmc,0:logo:boot:0x2E4200,0x200000:logo.bmp
+#######################################################################
+dd if=/dev/zero of=${out_file} bs=16384 count=185
+dd if=${bl1} of=${out_file} bs=1
+dd if=${fip_loader} of=${out_file} seek=65536 bs=1
+dd if=${fip_secure} of=${out_file} seek=393216 bs=1
+dd if=${fip_nonsecure} of=${out_file} seek=1966080 bs=1
+dd if=${uboot_param} of=${out_file} seek=3014656 bs=1
+dd if=${boot_logo} of=${out_file} seek=3031040 bs=1
+sync
 
-	if [ "${BUILD_ALL}" != "true" ] && [ "${BUILD_ANDROID}" != "true" ]; then
-		cp ${TOP}/device/nexell/avn_ref/bootloader ${TOP}/out/target/product/avn_ref
-	fi
-fi
+cp ${TOP}/device/nexell/avn_ref/bootloader ${TOP}/out/target/product/avn_ref
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
 	generate_key
