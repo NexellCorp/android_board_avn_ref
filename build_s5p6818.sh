@@ -248,6 +248,16 @@ if [ "${BUILD_DIST}" == "true" ]; then
 	build_dist ${TARGET_SOC} ${BOARD} ${BUILD_TAG}
 fi
 
+if [ "${BUILD_KERNEL}" == "true" ]; then
+	test -f ${TOP}/out/target/product/${BOARD}/ramdisk.img && \
+		make_android_bootimg ${KERNEL_DIR}/arch/arm64/boot/Image \
+		${KERNEL_DIR}/arch/arm64/boot/dts/nexell/s5p6818-avn-ref-rev01.dtb \
+		${TOP}/out/target/product/${BOARD}/ramdisk.img \
+		${TOP}/out/target/product/${BOARD}/boot.img \
+		2048 \
+		"buildvariant=${BUILD_TAG}"
+fi
+
 post_process ${TARGET_SOC} \
 	device/nexell/${BOARD}/partmap_s5p6818.txt \
 	${RESULT_DIR} \
