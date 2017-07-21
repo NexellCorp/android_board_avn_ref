@@ -236,7 +236,8 @@ dd if=${uboot_param} of=${out_file} seek=3014656 bs=1
 dd if=${boot_logo} of=${out_file} seek=3031040 bs=1
 sync
 
-cp ${TOP}/device/nexell/avn_ref/bootloader ${TOP}/out/target/product/avn_ref
+test -d ${TOP}/out/target/product/${BOARD} && \
+	cp ${TOP}/device/nexell/avn_ref/bootloader ${TOP}/out/target/product/${BOARD}
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
 	generate_key
