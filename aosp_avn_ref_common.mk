@@ -23,9 +23,6 @@ PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on avn_ref
 PRODUCT_MANUFACTURER := NEXELL
 
-PRODUCT_COPY_FILES += \
-		device/nexell/avn_ref/fstab.avn_ref:root/fstab.avn_ref
-
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.product.first_api_level=21
 

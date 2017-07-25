@@ -48,6 +48,10 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs
 
+# Recovery
+PRODUCT_PACKAGES += \
+	librecovery_updater_nexell
+
 PRODUCT_COPY_FILES += \
 	device/nexell/avn_ref/init.avn_ref.usb.rc:root/init.avn_ref.usb.rc \
 	device/nexell/avn_ref/ueventd.avn_ref.rc:root/ueventd.avn_ref.rc

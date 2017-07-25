@@ -19,7 +19,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, device/nexell/avn_ref/aosp_avn_ref_common.mk)
 
 PRODUCT_COPY_FILES += \
-		device/nexell/avn_ref/init.avn_ref_64.rc:root/init.avn_ref.rc
+		device/nexell/avn_ref/init.avn_ref_64.rc:root/init.avn_ref.rc \
+		device/nexell/avn_ref/init.recovery.avn_ref.rc:root/init.recovery.avn_ref.rc
 
 PRODUCT_COPY_FILES += \
 		device/nexell/kernel/kernel-4.4.x/arch/arm64/boot/Image:kernel
