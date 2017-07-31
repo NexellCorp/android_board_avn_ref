@@ -25,8 +25,6 @@ TARGET_NO_RADIOIMAGE := true
 TARGET_NO_RECOVERY := false
 
 # recovery
-$(call add-radio-file,bootloader)
-INSTALLED_RADIOIMAGE_TARGET += bootloader
 TARGET_RELEASETOOLS_EXTENSIONS := device/nexell/avn_ref
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_nexell
 TARGET_RECOVERY_FSTAB := device/nexell/avn_ref/recovery.fstab
@@ -76,7 +74,6 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 4920246272
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # boot image layout
-# BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_BOOTLOADER_IS_2ND := true
 
