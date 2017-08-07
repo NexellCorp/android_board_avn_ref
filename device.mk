@@ -78,8 +78,8 @@ PRODUCT_COPY_FILES += \
 
 
 # ffmpeg libraries
-EN_FFMPEG_EXTRACTOR := true
-EN_FFMPEG_AUDIO_DEC := true
+EN_FFMPEG_EXTRACTOR := false
+EN_FFMPEG_AUDIO_DEC := false
 
 ifeq ($(EN_FFMPEG_EXTRACTOR),true)
 
@@ -186,6 +186,24 @@ PRODUCT_PACKAGES += \
 	dejitter \
 	linear \
 	tscalib
+
+# omx
+PRODUCT_PACKAGES += \
+	libstagefrighthw \
+	libnx_video_api \
+	libNX_OMX_VIDEO_DECODER \
+	libNX_OMX_Base \
+	libNX_OMX_Core \
+	libNX_OMX_Common
+
+# stagefright FFMPEG compnents
+ifeq ($(EN_FFMPEG_AUDIO_DEC),true)
+PRODUCT_PACKAGES += libNX_OMX_AUDIO_DECODER_FFMPEG
+endif
+
+ifeq ($(EN_FFMPEG_EXTRACTOR),true)
+PRODUCT_PACKAGES += libNX_FFMpegExtractor
+endif
 
 PRODUCT_COPY_FILES += \
 	external/tslib/ts.conf:system/etc/ts.conf \
