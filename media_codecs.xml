@@ -88,8 +88,8 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.mpegl1" type="audio/mpeg-L1" />
         <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.mpegl2" type="audio/mpeg-L2" />
 		<MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.ape" type="audio/ape" />
+		<MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.wma" type="audio/x-ms-wma" />
   -->
-    <!--  <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.wma" type="audio/x-ms-wma" /> -->
 
         <!-- Nexell Video Decoder -->
         <MediaCodec name="OMX.NX.VIDEO_DECODER.3gpp" type="video/3gpp">
@@ -129,7 +129,6 @@ Only the three quirks included above are recognized at this point:
             <Limit name="block-size" value="16x16" />
             <Limit name="bitrate" range="1-40000000" />
         </MediaCodec>
-<!--
         <MediaCodec name="OMX.NX.VIDEO_DECODER.wmv" type="video/x-ms-wmv">
             <Limit name="size" min="32x32" max="1920x1088" />
             <Limit name="alignment" value="2x2" />
@@ -148,7 +147,6 @@ Only the three quirks included above are recognized at this point:
             <Limit name="block-size" value="16x16" />
             <Limit name="bitrate" range="1-45000000" />
         </MediaCodec>
--->
         <MediaCodec name="OMX.NX.VIDEO_DECODER.flv" type="video/x-flv">
             <Limit name="size" min="32x32" max="1920x1088" />
             <Limit name="alignment" value="2x2" />
@@ -164,13 +162,29 @@ Only the three quirks included above are recognized at this point:
         </MediaCodec>
     </Decoders>
 
-<!--
     <Encoders>
-        <MediaCodec name="OMX.google.h263.encoder" type="video/3gpp" />
-        <MediaCodec name="OMX.google.h264.encoder" type="video/avc" />
-        <MediaCodec name="OMX.google.mpeg4.encoder" type="video/mp4v-es" />
-        <MediaCodec name="OMX.google.vp8.encoder" type="video/x-vnd.on2.vp8" />
+        <MediaCodec name="OMX.NX.VIDEO_ENCODER.avc" type="video/avc">
+            <Limit name="size" min="96x16" max="1920x1088" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" range="6-326400" />
+            <Limit name="bitrate" range="1-40000000" />
+        </MediaCodec>
+        <MediaCodec name="OMX.NX.VIDEO_ENCODER.3gpp" type="video/3gpp">
+            <Limit name="size" min="176x144" max="1920x1088" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" range="6-244800" />
+            <Limit name="bitrate" range="1-40000000" />
+        </MediaCodec>
+        <MediaCodec name="OMX.NX.VIDEO_ENCODER.mpeg4" type="video/mp4v-es">
+            <Limit name="size" min="96x16" max="1920x1088" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" range="6-244800" />
+            <Limit name="bitrate" range="1-40000000" />
+        </MediaCodec>
     </Encoders>
--->
+
     <Include href="media_codecs_google_video.xml" />
 </MediaCodecs>

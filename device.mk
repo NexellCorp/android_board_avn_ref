@@ -193,6 +193,7 @@ PRODUCT_PACKAGES += \
 	libstagefrighthw \
 	libnx_video_api \
 	libNX_OMX_VIDEO_DECODER \
+	libNX_OMX_VIDEO_ENCODER \
 	libNX_OMX_Base \
 	libNX_OMX_Core \
 	libNX_OMX_Common
