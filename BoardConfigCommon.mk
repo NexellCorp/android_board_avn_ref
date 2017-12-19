@@ -32,6 +32,7 @@ TARGET_RECOVERY_FSTAB := device/nexell/avn_ref/recovery.fstab
 
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := false
+BOARD_USES_AUDIO_N := true
 
 BOARD_EGL_CFG := device/nexell/avn_ref/egl.cfg
 USE_OPENGL_RENDERER := true
