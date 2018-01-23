@@ -7,12 +7,15 @@ TOP=`pwd`
 source ${TOP}/device/nexell/tools/common.sh
 source ${TOP}/device/nexell/tools/dir.sh
 source ${TOP}/device/nexell/tools/make_build_info.sh
+source ${TOP}/device/nexell/tools/revert_patches.sh
 
 parse_args $@
 print_args
 setup_toolchain
 export_work_dir
-patches
+
+revert_common ${TOP}/device/nexell/avn_ref/patch
+patch_common ${TOP}/device/nexell/avn_ref/patch
 
 DEVICE_DIR=${TOP}/device/nexell/${BOARD_NAME}
 OUT_DIR=${TOP}/out/target/product/${BOARD_NAME}
