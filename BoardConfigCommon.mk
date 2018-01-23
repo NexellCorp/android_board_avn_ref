@@ -109,3 +109,9 @@ WIFI_DRIVER_FW_PATH_PARAM	:= "/dev/null"
 
 # certificate
 PRODUCT_DEFAULT_DEV_CERTIFICATE := device/nexell/avn_ref/signing_keys/release
+
+# camera
+BOARD_CAMERA_BACK_DEVICE := "/dev/video6"
+BOARD_CAMERA_NUM := 1
+BOARD_CAMERA_USE_ZOOM := false
+BOARD_CAMERA_INTERLACED := true
