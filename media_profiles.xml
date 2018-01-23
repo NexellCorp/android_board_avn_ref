@@ -118,19 +118,20 @@
                    <!--channels="1" />-->
         <!--</EncoderProfile>-->
 
-        <EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="30">
+        <!--<EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="8000000"
                    width="704"
                    height="480"
                    frameRate="30" />
-
+	-->
             <!-- Audio settings are not used for timealpse video recording -->
-            <Audio codec="aac"
+        <!--<Audio codec="aac"
                    bitRate="96000"
                    sampleRate="44100"
                    channels="1" />
         </EncoderProfile>
+	-->
 
         <ImageEncoding quality="90" />
         <ImageEncoding quality="80" />
@@ -141,6 +142,19 @@
 
        <CamcorderProfiles cameraId="1">
 
+        <EncoderProfile quality="720p" fileFormat="mp4" duration="30">
+            <Video codec="h264"
+                   bitRate="8000000"
+                   width="704"
+                   height="480"
+                   frameRate="30" />
+
+            <Audio codec="aac"
+                   bitRate="96000"
+                   sampleRate="44100"
+                   channels="1" />
+        </EncoderProfile>
+	<!--
         <EncoderProfile quality="480p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="8000000"
@@ -154,21 +168,22 @@
                    channels="1" />
 
         </EncoderProfile>
-
+	-->
+	<!--
         <EncoderProfile quality="timelapse480p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="3000000"
                    width="640"
                    height="480"
                    frameRate="30" />
-
+	-->
             <!-- Audio settings are not used for timealpse video recording -->
-            <Audio codec="aac"
+        <!-- <Audio codec="aac"
                    bitRate="96000"
                    sampleRate="44100"
                    channels="1" />
         </EncoderProfile>
-
+	-->
         <ImageEncoding quality="90" />
         <ImageEncoding quality="80" />
         <ImageEncoding quality="70" />
