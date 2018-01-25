@@ -91,14 +91,7 @@ if [ -f ${UBOOT_DIR}/u-boot.bin ]; then
 		${OUT_DIR}/ramdisk.img \
 		"boot:emmc")
 
-	UBOOT_RECOVERYCMD=$(make_uboot_bootcmd \
-		${DEVICE_DIR}/partmap.txt \
-		0x4007f800 \
-		2048 \
-		${KERNEL_IMG} \
-		${DTB_IMG} \
-		${OUT_DIR}/ramdisk-recovery.img \
-		"recovery:emmc")
+	UBOOT_RECOVERYCMD="ext4load mmc 0:6 0x49000000 recovery.dtb; ext4load mmc 0:6 0x40080000 recovery.kernel; ext4load mmc 0:6 0x48000000 ramdisk-recovery.img; booti 40080000 0x48000000:2d0f8f 0x49000000"
 
 	UBOOT_BOOTARGS="console=ttySAC3,115200n8 loglevel=7 printk.time=1 androidboot.hardware=avn_ref androidboot.console=ttySAC3 androidboot.serialno=0123456789abcdef nx_drm.fb_buffers=3 nx_drm.fb_vblank nx_drm.fb_pan_crtcs=0x1 quiet"
 
@@ -172,5 +165,12 @@ post_process ${TARGET_SOC} \
 	${OUT_DIR} \
 	avn \
 	${DEVICE_DIR}/logo.bmp
+
+make_ext4_recovery_image \
+	${KERNEL_IMG} \
+	${DTB_IMG} \
+	${OUT_DIR}/ramdisk-recovery.img \
+	67108864 \
+	${RESULT_DIR}
 
 make_build_info ${RESULT_DIR}
