@@ -267,3 +267,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 SKIP_BOOT_JARS_CHECK := true
 
 $(call inherit-product, frameworks/base/data/fonts/fonts.mk)
+
+# GMS
+#BUILD_GMS = yes
+ifeq ($(strip $(BUILD_GMS)),yes)
+PRODUCT_PACKAGES += \
+	GoogleLoginService \
+	GoogleServicesFramework \
+	GmsCore \
+	Phonesky \
+	com.google.android.maps.xml \
+	com.google.android.maps.jar \
+	Maps
+PRODUCT_COPY_FILES += \
+	device/nexell/avn_ref/init_gms_perm.sh:system/bin/init_gms_perm.sh
+endif
