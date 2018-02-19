@@ -26,7 +26,11 @@ if [ "${TARGET_SOC}" == "s5p6818" ]; then
 	source ${DEVICE_DIR}/build_s5p6818.sh $@
 else
 	cp ${DEVICE_DIR}/TargetArmConfig.mk ${DEVICE_DIR}/BoardConfig.mk
-	cp ${DEVICE_DIR}/aosp_avn_ref_32.mk ${DEVICE_DIR}/aosp_avn_ref.mk
+	if [ "${QUICKBOOT}" == "true" ]; then
+		cp ${DEVICE_DIR}/quickboot/aosp_avn_ref_32.mk ${DEVICE_DIR}/aosp_avn_ref.mk
+	else
+		cp ${DEVICE_DIR}/aosp_avn_ref_32.mk ${DEVICE_DIR}/aosp_avn_ref.mk
+	fi
 	source ${DEVICE_DIR}/build_s5p4418.sh $@
 fi
 

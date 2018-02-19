@@ -57,6 +57,11 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_MODULE}" == "true" ]; then
 fi
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
+	if [ "${QUICKBOOT}" == "true" ]; then
+		rm -rf ${OUT_DIR}/system
+		rm -rf ${OUT_DIR}/root
+		rm -rf ${OUT_DIR}/data
+	fi
 	generate_key ${BOARD_NAME}
 	build_android ${TARGET_SOC} ${BOARD_NAME} ${BUILD_TAG}
 fi
