@@ -16,38 +16,6 @@
 
 PRODUCT_SHIPPING_API_LEVEL := 25
 
-PRODUCT_PACKAGES := \
-    AccountAndSyncSettings \
-    DeskClock \
-    AlarmProvider \
-    Calculator \
-    Calendar \
-    Camera \
-    CertInstaller \
-    Email \
-    Gallery2 \
-    LatinIME \
-    Provision \
-    QuickSearchBox \
-    Settings \
-    Sync \
-    SystemUI \
-    CalendarProvider \
-    SyncProvider \
-	Stk
-
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-	LiveWallpapers \
-	LiveWallpapersPicker \
-	VisualizationWallpapers \
-	librs_jni
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    make_ext4fs \
-    setup_fs
-
 # Recovery
 PRODUCT_PACKAGES += \
 	librecovery_updater_nexell
@@ -269,7 +237,7 @@ SKIP_BOOT_JARS_CHECK := true
 $(call inherit-product, frameworks/base/data/fonts/fonts.mk)
 
 # GMS
-#BUILD_GMS = yes
+# BUILD_GMS = yes
 ifeq ($(strip $(BUILD_GMS)),yes)
 PRODUCT_PACKAGES += \
 	GoogleLoginService \
