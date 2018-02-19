@@ -25,13 +25,16 @@ on boot
     mkdir /config/usb_gadget/g1/strings/0x409 0770
     write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno}
     write /config/usb_gadget/g1/strings/0x409/manufacturer "NEXELL"
-    write /config/usb_gadget/g1/strings/0x409/product "ADB Gadget"
-    mkdir /config/usb_gadget/g1/functions/accessory.gs2
-    mkdir /config/usb_gadget/g1/functions/audio_source.gs3
+    write /config/usb_gadget/g1/strings/0x409/product "avn_ref"
     mkdir /config/usb_gadget/g1/functions/ffs.adb
     mkdir /config/usb_gadget/g1/functions/mtp.gs0
     mkdir /config/usb_gadget/g1/functions/ptp.gs1
+    mkdir /config/usb_gadget/g1/functions/accessory.gs2
+    mkdir /config/usb_gadget/g1/functions/audio_source.gs3
+    mkdir /config/usb_gadget/g1/functions/rndis.gs4
+    mkdir /config/usb_gadget/g1/functions/rndis.gs4/wceis 1
     mkdir /config/usb_gadget/g1/functions/midi.gs5
+    mkdir /config/usb_gadget/g1/functions/audio_sink.gs6
     mkdir /config/usb_gadget/g1/configs/b.1 0770 shell shell
     mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0770 shell shell
     write /config/usb_gadget/g1/os_desc/b_vendor_code 0x1
@@ -91,9 +94,11 @@ on property:sys.usb.config=accessory,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idProduct 0x2d01
 
 on property:sys.usb.config=audio_source && property:sys.usb.configfs=1
+    symlink /config/usb_gadget/g1/functions/audio_source.gs3 /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/idProduct 0x2d02
 
 on property:sys.usb.config=audio_source,adb && property:sys.usb.configfs=1
+    symlink /config/usb_gadget/g1/functions/audio_source.gs3 /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/idProduct 0x2d03
 
 on property:sys.usb.config=accessory,audio_source && property:sys.usb.configfs=1
@@ -101,3 +106,24 @@ on property:sys.usb.config=accessory,audio_source && property:sys.usb.configfs=1
 
 on property:sys.usb.config=accessory,audio_source,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idProduct 0x2d05
+
+on property:sys.usb.config=audio_sink && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "audiosink"
+    rm /config/usb_gadget/g1/configs/b.1/f1
+    rm /config/usb_gadget/g1/configs/b.1/f2
+    rm /config/usb_gadget/g1/configs/b.1/f3
+    symlink /config/usb_gadget/g1/functions/audio_sink.gs6 /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    setprop sys.usb.state ${sys.usb.config}
+    write /config/usb_gadget/g1/idProduct 0x2d06
+
+on property:sys.usb.config=audio_sink,adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "audiosink"
+    rm /config/usb_gadget/g1/configs/b.1/f1
+    rm /config/usb_gadget/g1/configs/b.1/f2
+    rm /config/usb_gadget/g1/configs/b.1/f3
+    symlink /config/usb_gadget/g1/functions/audio_sink.gs6 /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    setprop sys.usb.state ${sys.usb.config}
+    start adbd
+    write /config/usb_gadget/g1/idProduct 0x2d07
