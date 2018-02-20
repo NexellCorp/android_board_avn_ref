@@ -8,6 +8,9 @@ CROSS_COMPILE32="arm-linux-gnueabihf-"
 OPTEE_BUILD_OPT="PLAT_DRAM_SIZE=2048 PLAT_UART_BASE=0xc00a3000 SECURE_ON=0 SUPPORT_ANDROID=1"
 OPTEE_BUILD_OPT+=" CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE32=${CROSS_COMPILE32}"
 OPTEE_BUILD_OPT+=" UBOOT_DIR=${UBOOT_DIR}"
+if [ "${QUICKBOOT}" == "true" ]; then
+OPTEE_BUILD_OPT+=" QUICKBOOT=1"
+fi
 
 KERNEL_IMG=${KERNEL_DIR}/arch/arm64/boot/Image
 DTB_IMG=${KERNEL_DIR}/arch/arm64/boot/dts/nexell/s5p6818-avn-ref-rev01.dtb
@@ -74,7 +77,13 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_MODULE}" == "true" ]; then
 fi
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
+	if [ "${QUICKBOOT}" == "true" ]; then
+		rm -rf ${OUT_DIR}/system
+		rm -rf ${OUT_DIR}/root
+		rm -rf ${OUT_DIR}/data
+	fi
 	generate_key ${BOARD_NAME}
+	test -f ${DEVICE_DIR}/domain.te && cp ${DEVICE_DIR}/domain.te ${TOP}/system/sepolicy
 	build_android ${TARGET_SOC} ${BOARD_NAME} ${BUILD_TAG}
 fi
 
