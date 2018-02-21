@@ -1,3 +1,4 @@
 allow shell device:dir { open read };
 allow shell debugfs:dir read;
 allow shell sysfs:file { open read write getattr };
+allow shell system_prop:property_service set;
