@@ -258,6 +258,7 @@ PRODUCT_PACKAGES += \
 	bdcl
 
 # carlife with iphone
+ifeq ($(TARGET_ARCH),arm)
 PRODUCT_PACKAGES += \
 	libusb1.0 \
 	libcnary \
@@ -292,6 +293,7 @@ PRODUCT_PACKAGES += \
 	usbmuxd \
 	libzip \
 	ideviceinstaller
+endif
 
 PRODUCT_COPY_FILES += \
 	device/nexell/avn_ref/iproxy.sh:system/bin/iproxy.sh
