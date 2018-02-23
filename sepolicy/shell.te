@@ -3,4 +3,7 @@ allow shell debugfs:dir read;
 allow shell sysfs:file { open read write getattr };
 allow shell system_prop:property_service set;
 allow shell system_data_file:sock_file { getattr write };
+allow shell system_data_file:dir { write add_name create };
+allow shell system_data_file:file { create read write getattr open };
 allow shell usbmuxd:unix_stream_socket connectto;
+allow shell usb_device:dir { open read search };
