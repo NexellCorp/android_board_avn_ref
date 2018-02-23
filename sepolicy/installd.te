@@ -10,3 +10,7 @@ allow installd account_service:service_manager find;
 allow installd user_service:service_manager find;
 allow installd package_service:service_manager find;
 allow installd system_server:binder call;
+allow installd self:tcp_socket { create setopt bind name_bind node_bind listen accept };
+allow installd self:capability net_raw;
+allow installd port:tcp_socket name_bind;
+allow installd node:tcp_socket node_bind;
