@@ -82,6 +82,10 @@ on post-fs-data
     chmod 0666 /data/system/users/0/wallpaper
     chmod 0666 /data/system/users/0/wallpaper_info.xml
 
+    mkdir /data/misc/carlife 0770 shell shell
+    mkdir /data/misc/carlife/adb 0777 shell shell
+    mkdir /data/misc/carlife/usbmuxd 0777 shell shell
+
 service p2p_supplicant /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
     -e/data/misc/wifi/entropy.bin -N \
@@ -109,6 +113,11 @@ service rtw /system/bin/rtw_fwloader
     disabled
     oneshot
 
+service usbmuxd /system/bin/usbmuxd
+    class late_start
+    user root
+    group root
+
 on property:sys.boot_completed=1
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/foreground/boost/cpus 0-6
@@ -130,3 +139,5 @@ on property:sys.boot_completed=1
     write /sys/class/thermal/thermal_zone0/mode enabled
 
     class_start late_start
+
+    exec -- /system/bin/iproxy.sh
