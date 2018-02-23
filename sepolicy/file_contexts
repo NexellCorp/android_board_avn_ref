@@ -10,3 +10,5 @@
 # files in /system
 /system/bin/rtw_fwloader u:object_r:rtw_exec:s0
 /system/bin/init_gms_perm\.sh u:object_r:installd_exec:s0
+/system/bin/usbmuxd    u:object_r:usbmuxd_exec:s0
+/system/bin/iproxy\.sh u:object_r:installd_exec:s0
