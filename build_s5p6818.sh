@@ -77,11 +77,9 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_MODULE}" == "true" ]; then
 fi
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
-	if [ "${QUICKBOOT}" == "true" ]; then
-		rm -rf ${OUT_DIR}/system
-		rm -rf ${OUT_DIR}/root
-		rm -rf ${OUT_DIR}/data
-	fi
+	rm -rf ${OUT_DIR}/system
+	rm -rf ${OUT_DIR}/root
+	rm -rf ${OUT_DIR}/data
 	generate_key ${BOARD_NAME}
 	test -f ${DEVICE_DIR}/domain.te && cp ${DEVICE_DIR}/domain.te ${TOP}/system/sepolicy
 	test -f ${DEVICE_DIR}/app.te && cp ${DEVICE_DIR}/app.te ${TOP}/system/sepolicy
