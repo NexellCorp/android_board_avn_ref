@@ -231,6 +231,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024
 
+# set default none for usb
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.sys.usb.config=none
+
 #skip boot jars check
 SKIP_BOOT_JARS_CHECK := true
 
