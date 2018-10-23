@@ -1,0 +1,8 @@
+allow init tmpfs:lnk_file create;
+allow init configfs:file write;
+allow init configfs:lnk_file { create unlink };
+# neverallow
+# allow init sysfs:dir write;
+allow init self:capability sys_nice;
+allow init nx_block_device:blk_file { relabelfrom relabelto create setattr };
+dontaudit init kernel:system module_request;

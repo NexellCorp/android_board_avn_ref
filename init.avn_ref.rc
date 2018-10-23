@@ -1,0 +1,15 @@
+import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
+
+on init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+
+    export TSLIB_PLUGINDIR /system/lib/
+    export TSLIB_CALIBFILE /vendor/etc/pointercal
+    export TSLIB_CONFFILE /vendor/etc/ts.conf
+
+on fs
+    # Start HW service manager early
+    start hwservicemanager
+    mount_all /vendor/etc/fstab.${ro.hardware}
+    swapon_all /vendor/etc/fstab.${ro.hardware}

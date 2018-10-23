@@ -1,0 +1,3 @@
+allow bootanim hwservicemanager:binder call;
+allow bootanim gpu_device:chr_file rw_file_perms;
+allow bootanim vendor_file:file { execute getattr open read };

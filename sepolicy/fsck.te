@@ -1,0 +1,2 @@
+allow fsck nx_block_device:blk_file { getattr read open write ioctl };
+allow fsck block_device:blk_file { ioctl open read write };

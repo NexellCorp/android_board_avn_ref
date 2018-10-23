@@ -1,0 +1,13 @@
+# neverallow
+# allow system_server self:socket ioctl;
+allow system_server sysfs_devices_system_cpu:file w_file_perms;
+allow system_server sysfs:dir { read open };
+
+r_dir_file(system_server, idc_file)
+r_dir_file(system_server, keylayout_file)
+
+dontaudit system_server audioserver:file write;
+dontaudit system_server untrusted_app:file write;
+dontaudit system_server hal_audio_default:file write;
+dontaudit system_server appdomain:file write;
+dontaudit system_server self:capability sys_module;

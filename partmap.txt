@@ -1,0 +1,8 @@
+# partmap is flash device offset:image map
+# Before fusing, partmap must be flashed to target device
+# Target device uses this partmap information to fuse flash images by fastboot
+flash=mmc,0:bl1:2nd:0x200,0x4AFE00:bootloader;
+flash=mmc,0:boot:emmc:0x500000,0x4000000:boot.img;
+flash=mmc,0:system:ext4:0x4500000,0x40000000:system.img;
+flash=mmc,0:vendor:ext4:0x44500000,0x10000000:vendor.img;
+flash=mmc,0:userdata:ext4:0x54500000,0:userdata.img;
