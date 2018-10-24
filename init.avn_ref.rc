@@ -13,3 +13,7 @@ on fs
     start hwservicemanager
     mount_all /vendor/etc/fstab.${ro.hardware}
     swapon_all /vendor/etc/fstab.${ro.hardware}
+
+on boot
+    class_start main
+    class_start late_start
