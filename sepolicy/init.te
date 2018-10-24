@@ -6,3 +6,5 @@ allow init configfs:lnk_file { create unlink };
 allow init self:capability sys_nice;
 allow init nx_block_device:blk_file { relabelfrom relabelto create setattr };
 dontaudit init kernel:system module_request;
+allow init nativetest_data_file:dir { getattr open read };
+allow init nativetest_data_file:file getattr;

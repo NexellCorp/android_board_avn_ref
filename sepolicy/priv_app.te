@@ -8,3 +8,5 @@ allow priv_app proc_interrupts:file { open };
 allow priv_app proc_modules:file { open };
 allow priv_app sysfs_android_usb:file { open };
 allow priv_app zygote:dir { search };
+allow priv_app vendor_file:file read;
+allow priv_app vendor_file:file { execute getattr open };
