@@ -88,6 +88,8 @@ if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_ANDROID}" == "true" ]; then
     rm -rf ${OUT_DIR}/system
     rm -rf ${OUT_DIR}/root
     rm -rf ${OUT_DIR}/data
+    cp -R ${DEVICE_DIR}/source_overlay/* ${TOP}
+    mv ${TOP}/frameworks/native/services/inputflinger/Android.bp.mine ${TOP}/frameworks/native/services/inputflinger/Android.bp
     build_android ${TARGET_SOC} ${BOARD_NAME} ${BUILD_TAG}
 fi
 
