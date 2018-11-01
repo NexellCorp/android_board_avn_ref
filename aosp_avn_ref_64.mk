@@ -15,7 +15,7 @@
 #
 
 # Inherit the full_base and device configurations
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+# $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, device/nexell/avn_ref/aosp_avn_ref_common.mk)
 
 PRODUCT_COPY_FILES += \

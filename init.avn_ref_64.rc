@@ -21,7 +21,7 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
-    export TSLIB_PLUGINDIR /system/lib64/
+    export TSLIB_PLUGINDIR /system/lib/
     export TSLIB_CALIBFILE /system/etc/pointercal
 
 on late-init
