@@ -301,3 +301,6 @@ endif
 
 PRODUCT_COPY_FILES += \
 	device/nexell/avn_ref/iproxy.sh:system/bin/iproxy.sh
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	config.disable_bluetooth=true
