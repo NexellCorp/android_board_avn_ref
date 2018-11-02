@@ -66,7 +66,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.s5pxx18 \
     lights.s5pxx18 \
     audio.primary.s5pxx18 \
-    gatekeeper.s5pxx18
+    gatekeeper.s5pxx18 \
+    camera.s5pxx18
 
 # audio
 PRODUCT_PACKAGES += \
@@ -97,6 +98,14 @@ PRODUCT_PACKAGES += \
 # usb
 # PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
+
+# camera
+PRODUCT_PACKAGES += \
+    Camera2 \
+    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4 \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service
 
 # launcher
 PRODUCT_PACKAGES += \
@@ -176,6 +185,13 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
     frameworks/native/data/etc/android.hardware.wifi.rtt.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.rtt.xml
 
+# camera
+PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
+    frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml \
+    device/nexell/avn_ref/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
+    device/nexell/avn_ref/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
 
 ########################################################################
 # PRODUCT_PROPERTY_OVERRIDES
