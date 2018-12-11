@@ -103,7 +103,7 @@ if [ -f ${UBOOT_DIR}/u-boot.bin ]; then
         2048 \
         ${KERNEL_IMG} \
         ${DTB_IMG} \
-        ${OUT_DIR}/ramdisk.img \
+        ${DEVICE_DIR}/ramdisk-dummy \
         "boot:emmc")
 
     UBOOT_RECOVERYCMD="ext4load mmc 0:6 0x49000000 recovery.dtb; ext4load mmc 0:6 0x40080000 recovery.kernel; ext4load mmc 0:6 0x48000000 ramdisk-recovery.img; booti 40080000 0x48000000:2d0f8f 0x49000000"
@@ -153,14 +153,13 @@ if [ -f ${bl1} ] && [ -f ${loader} ] && [ -f ${secure} ] && [ -f ${nonsecure} ] 
     test -d ${OUT_DIR} && cp ${DEVICE_DIR}/bootloader ${OUT_DIR}
 fi
 
-test -f ${OUT_DIR}/ramdisk.img && \
-    make_android_bootimg \
-        ${KERNEL_IMG} \
-        ${DTB_IMG} \
-        ${OUT_DIR}/ramdisk.img \
-        ${OUT_DIR}/boot.img \
-        2048 \
-        "buildvariant=${BUILD_TAG}"
+make_android_bootimg \
+    ${KERNEL_IMG} \
+    ${DTB_IMG} \
+    ${DEVICE_DIR}/ramdisk-dummy \
+    ${OUT_DIR}/boot.img \
+    2048 \
+    "buildvariant=${BUILD_TAG}"
 
 post_process ${TARGET_SOC} \
     ${DEVICE_DIR}/partmap.txt \
