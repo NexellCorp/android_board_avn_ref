@@ -110,9 +110,15 @@ PRODUCT_DEFAULT_DEV_CERTIFICATE := device/nexell/avn_ref/signing_keys/release
 # camera
 BOARD_CAMERA_BACK_DEVICE := "6"
 BOARD_CAMERA_BACK_ORIENTATION := "0"
+# Interlaced Mode
+# default - Progressive
+# Progressive - 0, Interlaced - 1
 BOARD_CAMERA_BACK_INTERLACED := "1"
+# Clipper Only Mode - not use decimator for recording
+BOARD_CAMERA_BACK_COPY_MODE := "0"
 BOARD_CAMERA_NUM := 1
-BOARD_CAMERA_USE_ZOOM := true
+#BOARD_CAMERA_USE_ZOOM := true
+#BOARD_CAMERA_SUPPORT_SCALING := true
 
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
