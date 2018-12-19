@@ -108,15 +108,15 @@ WIFI_DRIVER_FW_PATH_PARAM	:= "/dev/null"
 PRODUCT_DEFAULT_DEV_CERTIFICATE := device/nexell/avn_ref/signing_keys/release
 
 # camera
-BOARD_CAMERA_BACK_DEVICE := "6"
-BOARD_CAMERA_BACK_ORIENTATION := "0"
+BOARD_CAMERA_BACK_DEVICE := "7,6"
+BOARD_CAMERA_BACK_ORIENTATION := "0,0"
 # Interlaced Mode
 # default - Progressive
 # Progressive - 0, Interlaced - 1
-BOARD_CAMERA_BACK_INTERLACED := "1"
+BOARD_CAMERA_BACK_INTERLACED := "1,0"
 # Clipper Only Mode - not use decimator for recording
-BOARD_CAMERA_BACK_COPY_MODE := "0"
-BOARD_CAMERA_NUM := 1
+BOARD_CAMERA_BACK_COPY_MODE := "0,1"
+BOARD_CAMERA_NUM := 2
 #BOARD_CAMERA_USE_ZOOM := true
 #BOARD_CAMERA_SUPPORT_SCALING := true
 
