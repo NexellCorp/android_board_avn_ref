@@ -16,7 +16,8 @@ KERNEL_IMG=${KERNEL_DIR}/arch/arm64/boot/Image
 DTB_IMG=${KERNEL_DIR}/arch/arm64/boot/dts/nexell/s5p6818-avn-ref-rev01.dtb
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_BL1}" == "true" ]; then
-	build_bl1 ${BL1_DIR}/bl1-${TARGET_SOC} avn 2
+	build_bl1 ${BL1_DIR}/bl1-${TARGET_SOC} avn 2 emmc
+	build_bl1 ${BL1_DIR}/bl1-${TARGET_SOC} avn 0 sd no
 fi
 
 if [ "${BUILD_ALL}" == "true" ] || [ "${BUILD_UBOOT}" == "true" ]; then
@@ -114,7 +115,7 @@ if [ -f ${UBOOT_DIR}/u-boot.bin ]; then
 fi
 
 # make bootloader
-echo "make bootloader"
+echo "make bootloader for emmc"
 # TODO: get seek offset from configuration file
 bl1=${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-emmcboot.bin
 loader=${OPTEE_DIR}/optee_build/result/fip-loader-emmc.img
@@ -142,6 +143,32 @@ if [ -f ${bl1} ] && [ -f ${loader} ] && [ -f ${secure} ] && [ -f ${nonsecure} ] 
 		${out_file}
 
 	test -d ${OUT_DIR} && cp ${DEVICE_DIR}/bootloader ${OUT_DIR}
+fi
+
+echo "make bootloader for sd"
+# TODO: get seek offset from configuration file
+bl1=${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-sdboot.bin
+loader=${OPTEE_DIR}/optee_build/result/fip-loader-sd.img
+out_file=${DEVICE_DIR}/bootloader-sd
+
+if [ -f ${bl1} ] && [ -f ${loader} ] && [ -f ${secure} ] && [ -f ${nonsecure} ] && [ -f ${param} ] && [ -f ${boot_logo} ]; then
+	BOOTLOADER_PARTITION_SIZE=$(get_partition_size ${DEVICE_DIR}/partmap.txt bootloader)
+	make_bootloader \
+		${BOOTLOADER_PARTITION_SIZE} \
+		${bl1} \
+		65536 \
+		${loader} \
+		393216 \
+		${secure} \
+		1966080 \
+		${nonsecure} \
+		3014656 \
+		${param} \
+		3031040 \
+		${boot_logo} \
+		${out_file}
+
+	test -d ${OUT_DIR} && cp ${DEVICE_DIR}/bootloader-sd ${OUT_DIR}
 fi
 
 if [ "${BUILD_DIST}" == "true" ]; then
