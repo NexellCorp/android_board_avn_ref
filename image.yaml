@@ -1,0 +1,30 @@
+# images type
+#  1: partmap
+#  2: raw data
+#  3: ext4 sparse image
+image_dir: /home/sw2/swpark/nexell-nougat/result-avn
+bootloader: bootloader-sd
+images:
+    - type: 1
+      file: partmap.txt
+    - type: 2
+      file: bootloader
+      dest_offset: 0x200
+    - type: 2
+      file: boot.img
+      dest_offset: 0x4b0000
+    - type: 3
+      file: system.img
+      dest_offset: 0x45b0000
+    - type: 3
+      file: vendor.img
+      dest_offset: 0x846b0000
+    - type: 3
+      file: cache.img
+      dest_offset: 0x887b0000
+    - type: 3
+      file: recovery.img
+      dest_offset: 0xa88b0000
+    - type: 3
+      file: userdata.img
+      dest_offset: 0xacbb0000
