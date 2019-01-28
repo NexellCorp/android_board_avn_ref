@@ -105,12 +105,16 @@ if [ -f ${UBOOT_DIR}/u-boot.bin ]; then
 	SPLASH_SOURCE="mmc"
 	SPLASH_OFFSET="0x2e4200"
 
+	AUTORECOVERY_CMD="nxrecovery mmc 1 mmc 0"
+
 	echo "UBOOT_BOOTCMD ==> ${UBOOT_BOOTCMD}"
 	echo "UBOOT_RECOVERYCMD ==> ${UBOOT_RECOVERYCMD}"
 
 	pushd `pwd`
 	cd ${UBOOT_DIR}
 	build_uboot_env_param ${CROSS_COMPILE} "${UBOOT_BOOTCMD}" "${UBOOT_BOOTARGS}" "${SPLASH_SOURCE}" "${SPLASH_OFFSET}" "${UBOOT_RECOVERYCMD}"
+	# for sd card auto recovery
+	build_uboot_env_param ${CROSS_COMPILE} "${UBOOT_BOOTCMD}" "${UBOOT_BOOTARGS}" "${SPLASH_SOURCE}" "${SPLASH_OFFSET}" "${UBOOT_RECOVERYCMD}" "${AUTORECOVERY_CMD}" "params_sd.bin"
 	popd
 fi
 
@@ -149,6 +153,7 @@ echo "make bootloader for sd"
 # TODO: get seek offset from configuration file
 bl1=${BL1_DIR}/bl1-${TARGET_SOC}/out/bl1-sdboot.bin
 loader=${OPTEE_DIR}/optee_build/result/fip-loader-sd.img
+param=${UBOOT_DIR}/params_sd.bin
 out_file=${DEVICE_DIR}/bootloader-sd
 
 if [ -f ${bl1} ] && [ -f ${loader} ] && [ -f ${secure} ] && [ -f ${nonsecure} ] && [ -f ${param} ] && [ -f ${boot_logo} ]; then
