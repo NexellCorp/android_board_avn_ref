@@ -142,4 +142,4 @@ on property:sys.boot_completed=1
 
     exec -- /system/bin/iproxy.sh
 
-    setprop sys.usb.config adb
+    setprop sys.usb.config mtp,adb
