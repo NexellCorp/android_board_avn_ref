@@ -140,7 +140,8 @@ PRODUCT_PACKAGES += \
 	hwcomposer.avn_ref \
 	audio.primary.avn_ref \
 	memtrack.avn_ref \
-	camera.avn_ref
+	camera.avn_ref \
+    lights.avn_ref
 
 # tinyalsa
 PRODUCT_PACKAGES += \
