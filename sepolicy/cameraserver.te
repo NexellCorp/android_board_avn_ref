@@ -1,2 +1,7 @@
 allow cameraserver rootfs:lnk_file getattr;
 allow cameraserver gpu_device:chr_file { open read write getattr ioctl };
+# Logs to /dev/kmsg
+allow cameraserver kmsg_device:chr_file { open w_file_perms getattr };
+allow cameraserver sysfs:dir { open read };
+allow cameraserver sysfs:file { open read };
+allow cameraserver sysfs:lnk_file { getattr };
