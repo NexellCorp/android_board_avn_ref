@@ -113,7 +113,7 @@ BOARD_CAMERA_BACK_ORIENTATION := "0"
 # Interlaced Mode
 # default - Progressive
 # Progressive - 0, Interlaced MIPI - 1, Interlaced Parallel - 2
-BOARD_CAMERA_BACK_INTERLACED := "2"
+BOARD_CAMERA_BACK_INTERLACED := "0"
 # Clipper Only Mode - not use decimator for recording
 BOARD_CAMERA_BACK_COPY_MODE := "1"
 
