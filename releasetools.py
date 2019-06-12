@@ -25,6 +25,13 @@ def WriteBootloader(info, img, btype):
     info.script.AppendExtra('nexell.write_bootloader(package_extract_file("bootloader"), "%s");' % btype)
     info.script.Print("End of Writing bootloader")
 
+def WriteDTB(info, img, offset):
+    print "WriteDTB ..."
+    common.ZipWriteStr(info.output_zip, "dtb.img", img)
+    info.script.Print("Writing dtb ...")
+    info.script.AppendExtra('nexell.write_dtb(package_extract_file("dtb.img"), "%s");' % offset)
+    info.script.Print("End of Writing dtb")
+
 def OTA_InstallEnd(info):
     print "Applying image-update script modifications..."
 
@@ -38,6 +45,17 @@ def OTA_InstallEnd(info):
 
     if bootloader_img is not None:
         WriteBootloader(info, bootloader_img, "mmc")
+
+    dtb_img = None
+    try:
+        dtb_img = info.input_zip.read("RADIO/dtb.img")
+    except AttributeError:
+        dtb_img = info.target_zip.read("RADIO/dtb.img")
+    except KeyError:
+        print "no dtb.img in target_files, skipping install"
+
+    if dtb_img is not None:
+        WriteDTB(info, dtb_img, "0x41B0000")
 
     return
 
