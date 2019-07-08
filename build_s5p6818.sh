@@ -576,7 +576,6 @@ if [ "${BUILD_KERNEL}" == "true" ]; then
 	test -f ${OUT_DIR}/ramdisk.img && \
 		make_android_bootimg \
 			${KERNEL_IMG} \
-			${DTB_IMG} \
 			${OUT_DIR}/ramdisk.img \
 			${OUT_DIR}/boot.img \
 			2048 \
