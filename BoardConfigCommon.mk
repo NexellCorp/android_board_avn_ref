@@ -40,6 +40,7 @@ TARGET_USES_ION := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 # see surfaceflinger
 MAX_VIRTUAL_DISPLAY_DIMENSION := 2048
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := false
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
